@@ -7,6 +7,7 @@ using System.Text;
 
 namespace Web.Helpers
 {
+    //Middleware: interpretador del cod para procesar, verificar y enviar la info ("puente")
     public class JwtMiddleware
     {
         private readonly RequestDelegate _next;
@@ -30,24 +31,28 @@ namespace Web.Helpers
 
         private async Task attachUserToContext(HttpContext context, IUserService userService, string token)
         {
+            //contexto y peticiones http
+            //de xs controlador se manejan todas las peticiones
+            //sin importarnos de que controlador viene
+            //
             try
             {
                 var tokenHandler = new JwtSecurityTokenHandler();
                 var skey = _configuration["Jwt:Key"];
-                var key = Encoding.ASCII.GetBytes(skey);
+                var key = Encoding.ASCII.GetBytes(skey); //se encripta? lleva a bytes el key
                 tokenHandler.ValidateToken(token, new TokenValidationParameters
                 {
+                    //y se valida el token
+                    //recibiendo por parametro el token a validar
+                    //
                     ValidateIssuerSigningKey = true,
-                    IssuerSigningKey = new SymmetricSecurityKey(key),
+                    IssuerSigningKey = new SymmetricSecurityKey(key), //ese token tiene una firma y esa firma tiene una key de seg
+                    //la firma digital siempre debe ser la misma
                     ValidateIssuer = false,
                     ValidateAudience = false,
                     // set clock skew to zero so tokens expire exactly at token expiration time (instead of 5 minutes later)
                     ClockSkew = TimeSpan.Zero
-                }, out SecurityToken validatedToken);
-
-
-
-
+                }, out SecurityToken validatedToken); //salida: token validado
 
                 var jwtToken = (JwtSecurityToken)validatedToken;
                 var userId = int.Parse(jwtToken.Claims.First(x => x.Type == "id").Value);
@@ -55,6 +60,8 @@ namespace Web.Helpers
                 //Attach user to context on successful JWT validation
                 //llamada a la base de datos
                 context.Items["ok"] = true;
+                context.Items["UserId"] = userId; //el id del user se lo enviamos desde el token
+                //la api se encarga de esto (lo conversado con el prof.)
             }
             catch
             {

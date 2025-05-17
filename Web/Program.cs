@@ -23,12 +23,12 @@ builder.Services.AddSwaggerGen(options =>
     options.SwaggerDoc("v1", new OpenApiInfo
     {
         Version = "v1",
-        Title = "API Gracosoft .NET CORe",
-        Description = "Aplicación elaborada durante las clases del 1 al 9 de la asignatura .Net Core, se encarga del procesamiento de la lógica de un videojuego RPG.",
+        Title = "API Gracosoft .NET Core",
+        Description = "Aplicacion elaborada durante las clases del 1 al 9 de la asignatura .Net Core, se encarga del procesamiento de la logica de un videojuego RPG.",
         TermsOfService = new Uri("https://example.com/terms"),
         Contact = new OpenApiContact
         {
-            Name = "Guillermo Giménez",
+            Name = "Guillermo Gimenez",
             Url = new Uri("https://github.com/GGimenezG/GracoNETCore")
         },
         License = new OpenApiLicense
@@ -71,7 +71,7 @@ builder.Services.AddSwaggerGen(options =>
     options.IncludeXmlComments(Path.Combine(AppContext.BaseDirectory, xmlFilename));
 });
 
-
+// scoped de: IEntityService, con, EntityService
 builder.Services.AddControllers();
 
 builder.Services.AddScoped(typeof(IUnitOfWork), typeof(UnitOfWork));
@@ -83,7 +83,10 @@ builder.Services.AddScoped(typeof(IMisionService), typeof(MisionService));
 builder.Services.AddScoped(typeof(IUbicacionService), typeof(UbicacionService));
 builder.Services.AddScoped(typeof(IEnemigoService), typeof(EnemigoService));
 builder.Services.AddScoped(typeof(IEquipoService), typeof(EquipoService));
-
+// !*
+builder.Services.AddScoped(typeof(IUserService), typeof(UserService));
+//
+// scoped de: IEntityRepository, con, EntityRepository
 builder.Services.AddScoped(typeof(IPersonajeRepository), typeof(PersonajeRepository));
 builder.Services.AddScoped(typeof(IHabilidadRepository), typeof(HabilidadRepository));
 builder.Services.AddScoped(typeof(IObjetivoRepository), typeof(ObjetivoRepository));
@@ -96,7 +99,8 @@ builder.Services.AddScoped(typeof(IRanuraRepository), typeof(RanuraRepository));
 builder.Services.AddScoped(typeof(ITipoEstadisticaRepository), typeof(TipoEstadisticaRepository));
 builder.Services.AddScoped(typeof(ITipoObjetoRepository), typeof(TipoObjetoRepository));
 builder.Services.AddScoped(typeof(IUbicacionRepository), typeof(UbicacionRepository));
-
+builder.Services.AddScoped(typeof(IUserRepository), typeof(UserRepository));
+//
 builder.Services.AddScoped(typeof(IBaseRepository<>), typeof(BaseRepository<>));
 builder.Services.AddScoped<IUserService, UserService>();
 

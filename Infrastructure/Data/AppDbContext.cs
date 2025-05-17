@@ -26,8 +26,8 @@ namespace Infrastructure.Data
         public DbSet<Ranura> Ranuras { get; set; }
         public DbSet<Objetivo> Objetivo { get; set; }
         public DbSet<PersonajeMision> PersonajeMisiones { get; set; }
-
-
+        //
+        public DbSet<User> Users { get; set; }
 
         public AppDbContext(DbContextOptions<AppDbContext> options) : base(options)
         {
@@ -49,6 +49,10 @@ namespace Infrastructure.Data
             modelBuilder.ApplyConfiguration(new RanuraConfiguration());
             modelBuilder.ApplyConfiguration(new PersonajeMisionConfiguration());
             modelBuilder.ApplyConfiguration(new ObjetivoConfiguration());
+        
+            //esto se maneja con migrations aswell
+            modelBuilder.ApplyConfiguration(new UserConfiguration());
+        
         }
 
 

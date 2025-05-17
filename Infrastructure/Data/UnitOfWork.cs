@@ -25,6 +25,8 @@ namespace Infrastructure.Data
         private RanuraRepository _ranuraRepository;
         private PersonajeMisionRepository _personajeMision;
         private ObjetivoRepository _objetivoRepository;
+        
+        private UserRepository _userRepository; //* aqui
         public UnitOfWork(AppDbContext context)
         {
             this._context = context;
@@ -44,7 +46,8 @@ namespace Infrastructure.Data
         public IRanuraRepository RanuraRepository => _ranuraRepository ??= new RanuraRepository(_context);
         public IPersonajeMisionRepository PersonajeMisionRepository => _personajeMision ??= new PersonajeMisionRepository(_context);
         public IObjetivoRepository ObjetivoRepository => _objetivoRepository ??= new ObjetivoRepository(_context);
-
+        // * 
+        public IUserRepository UserRepository => _userRepository ??= new UserRepository(_context); 
 
         public async Task<int> CommitAsync()
         {
