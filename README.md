@@ -2,7 +2,7 @@
 [![Open in Visual Studio Code](https://classroom.github.com/assets/open-in-vscode-2e0aaae1b6195c2367325f4f02e2d04e9abb55f0b24a779b69b11b9e10269abc.svg)](https://classroom.github.com/online_ide?assignment_repo_id=17729224&assignment_repo_type=AssignmentRepo)
 # Template
 
-Taller ASP.NET Core 2025 - GracoSoft Software:
+Taller ASP.NET Core 2025 - GracoSoft. Obj. general:
 Integrar la autenticación de una Web API mediante la implementación de JSON Web Tokens (JWT)
 en .NET, agregando nuevos endpoints para gestionar usuarios, como crear y modificar usuario,
 además de los endpoints para iniciar sesión, validar sesión y cerrar sesión. Además, se realizará la
